@@ -88,7 +88,29 @@ const getAllBooksHandler = (_request, h) => {
   return hasGenericError;
 };
 
+const getBookByIdHandler = (request, h) => {
+  const { bookId } = request.params;
+  const filteredBook = books.filter((book) => book.id === bookId)[0];
+  const book = filteredBook;
+
+  if (filteredBook) {
+    return {
+      status: "success",
+      data: { book }
+    };
+  }
+
+  const response = h.response({
+    status: "fail",
+    message: "Buku tidak ditemukan"
+  });
+
+  response.code(404);
+  return response;
+};
+
 module.exports = {
   addBookHandler,
-  getAllBooksHandler
+  getAllBooksHandler,
+  getBookByIdHandler
 };
