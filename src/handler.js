@@ -91,12 +91,11 @@ const getAllBooksHandler = (_request, h) => {
 const getBookByIdHandler = (request, h) => {
   const { bookId } = request.params;
   const filteredBook = books.filter((book) => book.id === bookId)[0];
-  const book = filteredBook;
 
   if (filteredBook) {
     return {
       status: "success",
-      data: { book }
+      data: { book: filteredBook }
     };
   }
 
