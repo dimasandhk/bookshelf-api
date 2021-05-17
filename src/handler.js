@@ -66,6 +66,29 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+// Saya sengaja tambah _ sebelum kata request agar menghilangkan warning
+const getAllBooksHandler = (_request, h) => {
+  const response = h.response({
+    status: "success",
+    data: books
+  });
+
+  response.code(200);
+
+  if (books || !books) {
+    return response;
+  }
+
+  const hasGenericError = h.response({
+    status: "error",
+    message: "Buku gagal ditambahkan"
+  });
+
+  hasGenericError.code(500);
+  return hasGenericError;
+};
+
 module.exports = {
-  addBookHandler
+  addBookHandler,
+  getAllBooksHandler
 };
