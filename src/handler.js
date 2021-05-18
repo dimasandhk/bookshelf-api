@@ -66,11 +66,16 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
-// Saya sengaja tambah _ sebelum kata request agar menghilangkan warning
 const getAllBooksHandler = (_request, h) => {
   const response = h.response({
     status: "success",
-    data: books
+    data: {
+      books: books.map((book) => ({
+        id: book.id,
+        name: book.name,
+        publisher: book.publisher
+      }))
+    }
   });
 
   response.code(200);
@@ -161,7 +166,7 @@ const editBookByIdHandler = (request, h) => {
 
   const response = h.response({
     status: "fail",
-    message: "Buku tidak ditemukan"
+    message: "Gagal memperbarui buku. Id tidak ditemukan"
   });
 
   response.code(404);
