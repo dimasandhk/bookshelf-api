@@ -101,9 +101,7 @@ const getAllBooksHandler = (request, h) => {
 
   response.code(200);
 
-  if (books || !books) {
-    return response;
-  }
+  if (books || !books) return response;
 
   const hasGenericError = h.response({
     status: "error",
